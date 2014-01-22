@@ -1,0 +1,304 @@
+@font-face{
+	font-family:Armata;
+	src:url("../fonts/Armata-Regular-webfont.woff");
+}
+body{
+	font-family:"Armata";
+	text-align:center;
+	font-size:85%;
+	color:#333343;
+}
+body,html,div,h1,h2,h3,h4,h5,h6,p,ol,ul,li,section,nav,header,footer,input{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+img{
+	border:0;
+	max-width:100%;
+}
+p{
+	margin:0 0 1em;
+}
+.contentWrapper{
+	text-align:left;
+	margin:0 auto;
+}
+.clearFloat{
+	overflow:auto;
+	zoom:1;
+}
+.headerWrapper{
+	background:#003676;
+	box-shadow:0 10px 5px 1px #CCC;
+	-moz-box-shadow:0 10px 5px 1px #CCC;
+	-webkit-box-shadow:0 10px 5px 1px #CCC;
+	margin:0 auto 2em;
+}
+#header{
+	margin:0 auto;
+	padding:.9em 0;
+}
+h1{
+}
+.logo{
+	width:200px;
+	text-align:left;
+	float:left;
+	clear:left;
+}
+	.logo a{
+		background: #FE7D19;
+		color: #FFF;
+		text-decoration: none;
+		text-transform: uppercase;
+		padding: .5em;
+		border-radius: 10px;
+	}
+#navigation{
+	font-size:1.1em;
+	padding:.2em;
+}
+#navigation a{
+	color:#FFF;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:1em;
+	padding: .5em;
+}
+#navigation a:hover{
+	background: #FE7D19;
+	color:#FFF;
+	border-radius: 5px;
+}
+h2{
+	font-size:1.5em;
+	padding:0 0 .5em;
+	margin:0;
+}
+h3{
+	display:none;
+	font-weight:normal;
+	font-size:1.5em;
+	margin:0 0 .5em;
+}
+.busUnitTitle,.slides h3{
+	display:block;
+}
+.careerContact{
+	padding:0 0 0 1.5em;
+}
+.contactUsWrapper{
+	text-align:left;
+}
+.textBox,.button{
+	padding:.5em;
+	border:1px solid #D8DCE2;
+	border-radius:5px;
+	border-shadow:none;
+	font-size:1.1em;
+	color:#474747;
+	font-family:"Armata";
+}
+	.textArea{
+		height: 5em;
+	}
+.group{
+	margin:0 0 .5em;
+}
+.error .textBox{
+	border-color:#F00;
+	color:#F00;
+}
+	.error label {
+		color: #F00;
+	}
+.buttonGroup{
+	clear:both;
+}
+.button{
+	background:#091C5A;
+	border-color:#474747;
+	padding:.5em;
+	margin:0 .5em .5em 0;
+	color: #FFF;
+	border:0;
+	font-weight: bold;
+	cursor:pointer;
+}
+	.button:hover{
+		background: #FE7D19;
+	}
+.secondary{
+	background: #9C9CA8;
+	color:#081B5A;	
+}
+	.secondary:hover{
+		color:#FFF;	
+	}
+label{
+	display: block;
+	color: #081B5A;
+	font-weight: bold;
+}
+	.field label{
+		display: inline;
+		margin:0 1em 0 0; 
+		color: #333343;
+		font-weight: normal;
+	}
+.field{
+	display: block;
+	margin:.5em 0 1em 0;
+}
+.footerWrapper{
+	border-top:1px solid #333343;
+	clear:both;
+	margin:1em 0 0;
+	padding:.5em 0;
+	text-align:center;
+}
+.inlineError{
+	margin:0 0 .5em;
+	color:#003676;
+	text-align:right;
+	font-size:.8em;
+}
+.successMsg{
+	border:1px solid #C2D337;
+	border-radius:5px;
+	background:#F5F8DF;
+	color:#8E9B25;
+	padding:.5em;
+}
+@media screen and (min-width:915px){
+	.contentWrapper,#header{
+		width:960px;
+	}
+	#navigation{
+		width:400px;
+		float:right;
+		clear:right;
+		margin:0;
+		text-align:right;
+	}
+	#navigation li{
+		display:inline;
+		margin:0 0 0 1em;
+	}
+	.textBox{
+		width:96%;
+	}
+	.button{
+	}
+	.miniLink{
+		display:none;
+	}
+}
+@media screen and (min-width:768px) and (max-width:914px){
+	.contentWrapper,#header{
+		width:700px;
+	}
+	#navigation{
+		width:400px;
+		margin:0;
+		text-align:left;
+		float:left;
+	}
+	#navigation li{
+		display:inline;
+		margin:0 0 0 1em;
+	}
+	.textBox{
+		width:96%;
+	}
+	.button{
+		width:98.5%;
+	}
+	.buttonGroup{
+		clear:none;
+	}
+	.miniLink{
+		display:none;
+	}
+}
+@media screen and (min-width:480px) and (max-width:767px){
+	.contentWrapper,#header{
+		width:400px;
+	}
+	#navigation{
+		width:300px;
+		margin:0 0 0 1em;
+		text-align:left;
+		float:left;
+	}
+	#navigation li{
+		display:inline;
+		margin:0 0 0 .5em;
+		font-size:.9em;
+	}
+	.textBox{
+		width:95%;
+	}
+	.button{
+		width:98%;
+	}
+	.buttonGroup{
+		clear:none;
+	}
+	.miniLink{
+		display:none;
+	}
+}
+@media screen and (max-width:479px){
+	.contentWrapper,#header{
+		width:93%;
+	}
+	#navigation{
+		width:auto;
+		margin:0;
+		float:right;
+		clear: right;
+	}
+	.miniLink{
+		display:block;
+		border:1px solid #787878;
+		border-radius:5px;
+		font-size:1em;
+		padding:.2em .5em;
+		margin:0;
+		background:#EDEDED;
+		cursor:pointer;
+	}
+	.topNavigation{
+		display:none;
+		margin:0 0 .5em;
+		background:#EDEDED;
+		position: absolute;
+		width: 100px;
+		right: 1em;
+		border:1px solid red;
+	}
+	#navigation li{
+		display:block;
+		margin:0 0 .5em;
+		font-size:.9em;
+		text-align:left;
+	}
+	#navigation a{
+		color:#333343;
+		display:block;
+	}
+	#navigation a:hover{
+		color:#003676;
+	}
+	.textBox{
+		width:93%;
+	}
+	.button{
+		width:96.5%;
+	}
+	.buttonGroup{
+		clear:none;
+	}
+}

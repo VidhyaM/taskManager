@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aconex - User Interface Engineer Coding Challenge</title>
+		<meta http-equiv="content-type" content-type="text/html; charset=utf-8" />
+		<meta name="description" content="Aconex RWD implemented using HTML5, CSS3 and Media Query" />
+		<meta name="keywords" content="Aconex, RWD, Responsive Web Design, HTML5, CSS3, Media Query" />
+		<meta name="viewport" content="initial-scale=1.0, width=device-width">
+		<link rel="stylesheet" media="all" href="css/taskStyles.css" />
+		<link type="image/x-icon" rel="icon" href="images/favicon.ico" />
+	</head>
+	<body>
+		<div class="headerWrapper">
+			<section id="header" class="clearFloat">
+				<header class="logo">
+					<h1><a href="index.html">Task Manager</a></h1>
+				</header>
+				<nav id="navigation">
+					<h3 class="miniLink" id="mobileNavLink">Menu</h3>
+					<ul id="topMenu" class="topNavigation">
+						<li><a href="index.html">Add Tasks</a></li>
+						<li><a href="index.html">List Tasks</a></li>
+					</ul>
+				</nav>
+			</section>
+		</div>
+		<div class="contentWrapper">
+			<section id="content">
+				<div class="mainWrapper">
+					<section id="main">
+						<header>
+							<h2>Add your task</h2>
+						</header>
+						<div class="addTaskContent">
+							<div class="addTaskContentWrapper">
+								<section id="addTask">
+									<p>You can add your task details in the below form. While adding, you can also set the priority of the task.</p>
+									<form name="add_task" id="add_task" method="post" action="#">
+										<p class="group">
+											<label for="task_name">Task Name</label>
+											<span class="field">
+												<input type="text" placeholder="Enter your task name" name="task_name" id="task_name" class="textBox" autocomplete="off" />
+											</span>
+										</p>
+										<p class="group">
+											<label for="task_priority">Task Category</label>
+											<span class="field">
+												<label for="task_priority_normal">
+													<input type="radio" name="task_priority" id="task_priority_normal" class="radioButton" />
+													Normal
+												</label>
+												<label for="task_priority_critical">
+													<input type="radio" name="task_priority" id="task_priority_critical" class="radioButton" />
+													Critical
+												</label>
+											</span>
+										</p>
+										<p class="group">
+											<label for="task_details">Task Details</label>
+											<span class="field">
+												<textarea placeholder="Enter your task in detail" name="task_details" id="task_details" class="textBox textArea" autocomplete="off"></textarea>
+											</span>
+										</p>
+										<p class="group">
+											<label for="task_eta">Task ETA</label>
+											<span class="field">
+												<input type="date" placeholder="Enter your task ETA date in DD/MM/YYYY format" name="task_eta" id="task_eta" class="textBox" autocomplete="off" />
+											</span>
+										</p>
+										<p class="group buttonGroup">
+											<input type="submit" value="Add your task" name="add_task" id="add_task" class="button" />
+											<input type="button" value="Cancel" name="cancel_add_task" id="cancel_add_task" class="button secondary" />
+										</p>
+									</form>
+								</section>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="footerWrapper">
+					<section id="footer">
+						<header>
+							<h3>Copyright Information</h3>
+						</header>
+						<p>Copyright &copy; 2014. All rights reserved.</p>
+					</section>
+				</div>
+			</section>
+		</div>
+		<script src="javascript/taskManager.js"></script>
+	</body>
+</html>
