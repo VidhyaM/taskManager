@@ -14,6 +14,6 @@ taskManager.displayItems = {
 	}
 };
 
-if (document && document.getElementsByTagName && document.getElementById && document.body) {
+window.onload = function() {
 	taskManager.displayItems.init();
-}
+};
