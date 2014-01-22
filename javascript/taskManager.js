@@ -8,9 +8,8 @@ taskManager.displayItems = {
 		var menuTitle = document.getElementById("mobileNavLink");
 		var menu = document.getElementById("topMenu");
 
-		menuTitle.onmouseover = function() {
-			console.log(menu.getAttribute("display"));
-			menu.style.display = (menu.getAttribute("display") === "block") ? "none" : "block";
+		menuTitle.onclick = function() {
+			menu.style.display = (menu.style.display === "block") ? "none" : "block";
 		}
 	}
 };

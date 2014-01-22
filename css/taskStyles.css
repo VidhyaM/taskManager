@@ -227,10 +227,10 @@ label{
 		width:400px;
 	}
 	#navigation{
-		width:300px;
-		margin:0 0 0 1em;
-		text-align:left;
-		float:left;
+		width:auto;
+		margin:0;
+		float:right;
+		clear: right;
 	}
 	#navigation li{
 		display:inline;
@@ -276,8 +276,7 @@ label{
 		background:#EDEDED;
 		position: absolute;
 		width: 100px;
-		right: 1em;
-		border:1px solid red;
+		right: 1.3em;
 	}
 	#navigation li{
 		display:block;
