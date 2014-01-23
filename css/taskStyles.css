@@ -83,12 +83,13 @@ h1{
 		color:#FFF;
 		border-radius:5px;
 	}
-	#navigation .active a{
+	#navigation .active{
 		background:#FE7D19;
+		padding:.5em;
 		color:#FFF;
 		border-radius:5px;
 	}
-	#navigation .active a:hover{
+	#navigation .active:hover{
 		color:#003676;
 	}
 .message{

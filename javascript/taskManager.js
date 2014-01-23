@@ -58,16 +58,40 @@ taskManager.updateTasks = {
 	saveTasks: function(formFieldsValObj) {
 		formFieldJSON = JSON.stringify(formFieldsValObj);
 		localStorage[localStorage.length] = formFieldJSON;
-		console.log(localStorage.length);
+	},
+
+	listTasks: function() {
+		var tasksItems = "";
+		for(var i = 0; i < localStorage.length; i++) {
+			tasksItems += localStorage[i];
+		}
+		taskManager.utils.getElem("listTasks").innerHTML = tasksItems;
 	},
 
 	eventHandlers: function() {
 		var formObj = taskManager.utils.getElem(this.fields.formAddTask);
 		var that = taskManager.updateTasks;
+		var addTaskLnk = taskManager.utils.getElem("addTaskLink");
+		var listTaskLnk = taskManager.utils.getElem("listTaskLink");
 		formObj.onsubmit = function() {
 			formFieldsValObj = that.getFormFields(formObj);
 			that.saveTasks(formFieldsValObj);
 			return false;
+		},
+
+		addTaskLnk.onclick = function() {
+			taskManager.utils.getElem("addTaskContent").className = "";
+			taskManager.utils.getElem("listTaskContent").className = "hide";
+			listTaskLnk.className = "";
+			this.className = "active";
+		},
+
+		listTaskLnk.onclick = function() {
+			taskManager.utils.getElem("addTaskContent").className = "hide";
+			taskManager.utils.getElem("listTaskContent").className = "";
+			addTaskLnk.className = "";
+			this.className = "active";
+			that.listTasks();
 		}
 	}
 };

@@ -19,8 +19,8 @@
 				<nav id="navigation">
 					<h3 class="miniLink" id="mobileNavLink">Menu</h3>
 					<ul id="topMenu" class="topNavigation">
-						<li class="active"><a href="index.html">Add Tasks</a></li>
-						<li><a href="index.html">List Tasks</a></li>
+						<li><a id="addTaskLink" class="active" href="#">Add Tasks</a></li>
+						<li><a id="listTaskLink" href="#">List Tasks</a></li>
 					</ul>
 				</nav>
 			</section>
@@ -35,55 +35,61 @@
 						<div id="hasNoLocalStorage" class="message error hide">
 							<p>Your browser does not support local storage and you can not view the added task!</p>
 						</div>
-						<div id="addTask">
+						<div id="addTaskContent">
 							<header>
 								<h2>Add your task</h2>
 							</header>
-							<div class="addTaskContent">
-								<div class="addTaskContentWrapper">
-									<section id="addTask">
-										<p>You can add your task details in the below form. While adding, you can also set the priority of the task.</p>
-										<form name="form_add_task" id="form_add_task" method="post" action="test.php">
-											<p class="group">
-												<label for="task_name">Task Name</label>
-												<span class="field">
-													<input type="text" placeholder="Enter your task name" name="task_name" id="task_name" class="inputControl textBox" autocomplete="off" required />
-												</span>
-											</p>
-											<p class="group">
-												<label for="task_priority">Task Category</label>
-												<span class="field">
-													<select class="inputControl" name="task_priority" id="task_priority">
-														<option value="normal">Normal</option>
-														<option value="high">High</option>
-													</select>
-												</span>
-											</p>
-											<p class="group">
-												<label for="task_details">Task Details</label>
-												<span class="field">
-													<textarea placeholder="Enter your task in detail" name="task_details" id="task_details" class="inputControl textBox textArea" autocomplete="off" required></textarea>
-												</span>
-											</p>
-											<p class="group">
-												<label for="task_created">Task Created</label>
-												<span class="field">
-													<input type="text" placeholder="" name="task_created" id="task_created" class="inputControl textBox readonlyText small" autocomplete="off" readOnly />
-												</span>
-											</p>
-											<p class="group">
-												<label for="task_eta">Task ETA</label>
-												<span class="field">
-													<input type="date" placeholder="Enter your task ETA date in DD/MM/YYYY format" name="task_eta" id="task_eta" class="inputControl textBox small" autocomplete="off" required />
-												</span>
-											</p>
-											<p class="group buttonGroup">
-												<input type="submit" value="Add your task" name="add_task" id="add_task" class="button" />
-												<input type="button" value="Cancel" name="cancel_add_task" id="cancel_add_task" class="button secondary" />
-											</p>
-										</form>
-									</section>
-								</div>
+							<div id="addTaskContent" class="addTaskContentWrapper">
+								<section id="addTask">
+									<p>You can add your task details in the below form. While adding, you can also set the priority of the task.</p>
+									<form name="form_add_task" id="form_add_task" method="post" action="test.php">
+										<p class="group">
+											<label for="task_name">Task Name</label>
+											<span class="field">
+												<input type="text" placeholder="Enter your task name" name="task_name" id="task_name" class="inputControl textBox" autocomplete="off" required />
+											</span>
+										</p>
+										<p class="group">
+											<label for="task_priority">Task Category</label>
+											<span class="field">
+												<select class="inputControl" name="task_priority" id="task_priority">
+													<option value="normal">Normal</option>
+													<option value="high">High</option>
+												</select>
+											</span>
+										</p>
+										<p class="group">
+											<label for="task_details">Task Details</label>
+											<span class="field">
+												<textarea placeholder="Enter your task in detail" name="task_details" id="task_details" class="inputControl textBox textArea" autocomplete="off" required></textarea>
+											</span>
+										</p>
+										<p class="group">
+											<label for="task_created">Task Created</label>
+											<span class="field">
+												<input type="text" placeholder="" name="task_created" id="task_created" class="inputControl textBox readonlyText small" autocomplete="off" readOnly />
+											</span>
+										</p>
+										<p class="group">
+											<label for="task_eta">Task ETA</label>
+											<span class="field">
+												<input type="date" placeholder="Enter your task ETA date in DD/MM/YYYY format" name="task_eta" id="task_eta" class="inputControl textBox small" autocomplete="off" required />
+											</span>
+										</p>
+										<p class="group buttonGroup">
+											<input type="submit" value="Add your task" name="add_task" id="add_task" class="button" />
+											<input type="button" value="Cancel" name="cancel_add_task" id="cancel_add_task" class="button secondary" />
+										</p>
+									</form>
+								</section>
+							</div>
+						</div>
+						<div id="listTaskContent" class="hide">
+							<header>
+								<h2>View/Edit your tasks</h2>
+							</header>
+							<p id="noTasks" class="hide">You have not added any tasks. <a id="addTaskLink" href="#">Add your tasks now</a>.</p>
+							<div id="listTasks">
 							</div>
 						</div>
 					</section>
