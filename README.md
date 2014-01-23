@@ -1,6 +1,6 @@
 Task Manager Prototype README.md file 
 -------------------------------------
-## Page Markup
+### Page Markup
 
 Markup is developed using HTML5, using the HTML5 APIs
 
@@ -9,14 +9,14 @@ Markup is developed using HTML5, using the HTML5 APIs
 	*	Local Storage
 	*	Placeholder attributes for input controls
 
-## Page Styles
+### Page Styles
 
 Styles are added using CSS2 and CSS3
 
 	*	Used the user specific font-family (CSS3)
 	*	Used the Responsive Web Design concept to be viewed on all devices and resolutions (RWD)
 
-## Page Accessibility
+### Page Accessibility
 
 The page is completely Accessible, in the way that
 
