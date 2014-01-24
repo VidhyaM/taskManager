@@ -29,11 +29,12 @@
 			<section id="content">
 				<div class="mainWrapper">
 					<section id="main">
-						<div id="hasLocalStorage" class="message hide">
-							<p>Your browser supports local storage and you are ready to add/edit your tasks!</p>
+						<div id="hasLocalStorage" class="message success hide">
+							<p id="addEditSuccess" class="hide">Task is updated successfully!</p>
+							<p>Your browser supports local storage and you are ready to <a id="addEditLink" href="#">add/edit</a> your tasks!</p>
 						</div>
 						<div id="hasNoLocalStorage" class="message error hide">
-							<p>Your browser does not support local storage and you can not view the added task!</p>
+							<p>Your browser does not support local storage and you can not view/add/edit the added task!</p>
 						</div>
 						<div id="addTaskContent">
 							<header>
@@ -42,7 +43,7 @@
 							<div id="addTaskContent" class="addTaskContentWrapper">
 								<section id="addTask">
 									<p>You can add your task details in the below form. While adding, you can also set the priority of the task.</p>
-									<form name="form_add_task" id="form_add_task" method="post" action="test.php">
+									<form name="form_add_task" id="form_add_task" method="post" action="">
 										<p class="group">
 											<label for="task_name">Task Name</label>
 											<span class="field">
@@ -71,12 +72,24 @@
 											</span>
 										</p>
 										<p class="group">
-											<label for="task_eta">Task ETA</label>
+											<label for="task_eta">Task Completion</label>
 											<span class="field">
-												<input type="date" placeholder="Enter your task ETA date in DD/MM/YYYY format" name="task_eta" id="task_eta" class="inputControl textBox small" autocomplete="off" required />
+												<input type="date" placeholder="DD/MM/YYYY" name="task_eta" id="task_eta" class="inputControl textBox small" autocomplete="off" required />
+											</span>
+										</p>
+										<p class="group">
+											<label for="task_status">Task Status</label>
+											<span class="field">
+												<select class="inputControl" name="task_status" id="task_status" />
+													<option value="not_started">Not started</option>
+													<option value="in_progress">In progress</option>
+													<option value="blocked">Blocked</option>
+													<option value="completed">Completed</option>
+												</select>
 											</span>
 										</p>
 										<p class="group buttonGroup">
+											<input type="hidden" name="task_id" id="task_id" />
 											<input type="submit" value="Add your task" name="add_task" id="add_task" class="button" />
 											<input type="button" value="Cancel" name="cancel_add_task" id="cancel_add_task" class="button secondary" />
 										</p>
@@ -88,7 +101,7 @@
 							<header>
 								<h2>View/Edit your tasks</h2>
 							</header>
-							<p id="noTasks" class="hide">You have not added any tasks. <a id="addTaskLink" href="#">Add your tasks now</a>.</p>
+							<p id="noTasks" class="hide">You have not added any tasks. <a id="addYourTaskLink" href="#">Add your tasks now</a>.</p>
 							<div id="listTasks">
 							</div>
 						</div>

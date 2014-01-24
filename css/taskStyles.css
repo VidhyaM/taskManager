@@ -42,8 +42,6 @@ p{
 	margin:0 auto;
 	padding:.9em 0;
 }
-h1{
-}
 .logo{
 	width:200px;
 	text-align:left;
@@ -104,6 +102,9 @@ h1{
 	.message p{
 		margin:0;
 	}
+	.success p{
+		margin:0 0 .5em;
+	}
 	.error p{
 		color:#F00;
 	}
@@ -117,15 +118,6 @@ h3{
 	font-weight:normal;
 	font-size:1.5em;
 	margin:0 0 .5em;
-}
-.busUnitTitle,.slides h3{
-	display:block;
-}
-.careerContact{
-	padding:0 0 0 1.5em;
-}
-.contactUsWrapper{
-	text-align:left;
 }
 .textBox,.button,select{
 	padding:.5em;
@@ -226,6 +218,39 @@ label{
 .miniLink{
 	display:none;
 }
+.tasksDisp{
+	background:#F6F7F9;
+	margin:0 0 1em;
+	padding:.5em;
+	border-radius:5px;
+}
+	.tasksDisp p{
+		margin:0 0 .5em;
+	}
+.taskLabel{
+	text-transform:capitalize;
+	color:#FE7D19;
+}
+.editDelTask{
+	float: right;
+	display: block;
+}
+	.editDelTask a{
+		border-radius: 5px;
+		padding: .5em;
+		background: #FE7D19;
+		font-weight: bold;
+		color: #FFF;
+		cursor:pointer;
+		margin: 0 0 0 .5em;
+		text-decoration:none;
+	}
+	.delTask a {
+		background: #F00;
+	}
+	.editDelTask a:hover{
+		text-decoration: underline;
+	}
 @media screen and (min-width:915px){
 	.contentWrapper,#header{
 		width:960px;

@@ -11,6 +11,7 @@ taskManager.displayItems = {
 		this.checklocalStorageSupport();
 		this.eventHandlers();
 		this.getTaskCreatedDate();
+		taskManager.utils.getElem("task_id").value = localStorage.length;
 	},
 	checklocalStorageSupport: function() {
 		if(window.localStorage) {
@@ -61,38 +62,66 @@ taskManager.updateTasks = {
 	},
 
 	listTasks: function() {
-		var tasksItems = "";
-		for(var i = 0; i < localStorage.length; i++) {
-			tasksItems += localStorage[i];
+		var taskCount = localStorage.length;
+		if (taskCount == 0) {
+			taskManager.utils.getElem("noTasks").className = "";
+		} else {
+			var tasksItems = "<ul class='tasksList'>";
+			for(var i = 0; i < localStorage.length; i++) {
+				tasksItems += "<li class='tasksDisp'><p class='clearFloat'><span class='editDelTask'><span class='editTask'><a href='#'>Edit</a></span><span class='delTask'><a href='#'>Delete</a></span></span></p>";
+				var taskRecordObj = JSON.parse(localStorage[i]);
+				for (var key in taskRecordObj) {
+					var keyLbl = key.replace('_', ' ');
+					tasksItems += "<p><span class='taskLabel'>" + keyLbl + ": </span><span class='taskContent'>" + taskRecordObj[key] + "</span></p>";
+				}
+				tasksItems += "</li>";
+			}
+			tasksItems += "</ul>";
+			taskManager.utils.getElem("listTasks").innerHTML = tasksItems;
 		}
-		taskManager.utils.getElem("listTasks").innerHTML = tasksItems;
 	},
 
 	eventHandlers: function() {
 		var formObj = taskManager.utils.getElem(this.fields.formAddTask);
 		var that = taskManager.updateTasks;
 		var addTaskLnk = taskManager.utils.getElem("addTaskLink");
+		var addYourTaskLink = taskManager.utils.getElem("addYourTaskLink");
+		var addEditLink = taskManager.utils.getElem("addEditLink");
 		var listTaskLnk = taskManager.utils.getElem("listTaskLink");
+		
 		formObj.onsubmit = function() {
+			var errFlag = false;
 			formFieldsValObj = that.getFormFields(formObj);
 			that.saveTasks(formFieldsValObj);
-			return false;
+			redirectToTasksList(true);
+			return errFlag;
 		},
 
-		addTaskLnk.onclick = function() {
+		addTaskForm = function () {
 			taskManager.utils.getElem("addTaskContent").className = "";
 			taskManager.utils.getElem("listTaskContent").className = "hide";
+			taskManager.utils.getElem("addEditSuccess").className = "hide";
+			taskManager.utils.getElem("task_id").value = localStorage.length;
 			listTaskLnk.className = "";
 			this.className = "active";
 		},
 
-		listTaskLnk.onclick = function() {
+		redirectToTasksList = function (msgFlag) {
 			taskManager.utils.getElem("addTaskContent").className = "hide";
 			taskManager.utils.getElem("listTaskContent").className = "";
 			addTaskLnk.className = "";
-			this.className = "active";
+			listTaskLnk.className = "active";
+			taskManager.utils.getElem("addEditSuccess").className = (msgFlag === true) ? "" : "hide";
 			that.listTasks();
-		}
+		},
+
+		addTaskLnk.onclick = addTaskForm,
+
+		addYourTaskLink.onclick = addTaskForm,
+
+		addEditLink.onclick = addTaskForm,
+
+		listTaskLnk.onclick = redirectToTasksList
 	}
 };
 
