@@ -68,13 +68,17 @@ taskManager.updateTasks = {
 		} else {
 			var tasksItems = "<ul class='tasksList'>";
 			for(var i = 0; i < localStorage.length; i++) {
-				tasksItems += "<li class='tasksDisp'><p class='clearFloat'><span class='editDelTask'><span class='editTask'><a href='#'>Edit</a></span><span class='delTask'><a href='#'>Delete</a></span></span></p>";
+				tasksItems += "<li class='tasksDisp'>";
 				var taskRecordObj = JSON.parse(localStorage[i]);
 				for (var key in taskRecordObj) {
+					if (key === "task_id") {
+						var tasksEditDelItems = "<p class='clearFloat'><span class='editDelTask'><span class='editTask'><a href='#' id='edit" + taskRecordObj[key] + "' onclick='editTask(" + taskRecordObj[key] + ");'>Edit</a></span><span class='delTask'><a href='#' id='delete" + taskRecordObj[key] + "' onclick='deleteTask(" + taskRecordObj[key] + ");'>Delete</a></span></span></p>";
+						continue;
+					}
 					var keyLbl = key.replace('_', ' ');
 					tasksItems += "<p><span class='taskLabel'>" + keyLbl + ": </span><span class='taskContent'>" + taskRecordObj[key] + "</span></p>";
 				}
-				tasksItems += "</li>";
+				tasksItems += tasksEditDelItems + "</li>";
 			}
 			tasksItems += "</ul>";
 			taskManager.utils.getElem("listTasks").innerHTML = tasksItems;
@@ -121,7 +125,15 @@ taskManager.updateTasks = {
 
 		addEditLink.onclick = addTaskForm,
 
-		listTaskLnk.onclick = redirectToTasksList
+		listTaskLnk.onclick = redirectToTasksList,
+
+		editTask = function (taskNum) {
+			console.log("Edit operation clicked for taskID: " + taskNum);
+		},
+
+		deleteTask = function (taskNum) {
+			console.log("Delete operation for taskID: " + taskNum);
+		}
 	}
 };
 

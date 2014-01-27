@@ -232,24 +232,25 @@ label{
 	color:#FE7D19;
 }
 .editDelTask{
-	float: right;
-	display: block;
+	float:right;
+	display:block;
+	margin:.5em 0;
 }
 	.editDelTask a{
-		border-radius: 5px;
-		padding: .5em;
-		background: #FE7D19;
-		font-weight: bold;
-		color: #FFF;
+		border-radius:5px;
+		padding:.5em;
+		background:#FE7D19;
+		font-weight:bold;
+		color:#FFF;
 		cursor:pointer;
-		margin: 0 0 0 .5em;
+		margin:0 0 0 .5em;
 		text-decoration:none;
 	}
 	.delTask a {
-		background: #F00;
+		background:#F00;
 	}
 	.editDelTask a:hover{
-		text-decoration: underline;
+		text-decoration:underline;
 	}
 @media screen and (min-width:915px){
 	.contentWrapper,#header{
