@@ -105,8 +105,12 @@ p{
 	.success p{
 		margin:0 0 .5em;
 	}
-	.error p{
+	.error p,#deleteSuccess{
 		color:#F00;
+	}
+	#addEditSuccess{
+		color:#00F;
+		font-weight:bold;
 	}
 h2{
 	font-size:1.5em;
@@ -154,6 +158,17 @@ select{
 	.error label{
 		color:#F00;
 	}
+.delTaskWarn{
+	background:#FFF;
+	color:#F00;
+	font-weight:bold;
+	border-radius:5px;
+	padding:.5em;
+	position:absolute;
+	width:10em;
+	border:1px solid #FE7D19;
+	margin:2em 0 0 -11em;
+}
 .buttonGroup{
 	clear:both;
 }

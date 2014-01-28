@@ -95,7 +95,7 @@ taskManager.updateTasks = {
 				var taskRecordObj = JSON.parse(tasks.tasks_list[i]);
 				for (var key in taskRecordObj) {
 					if (key === "task_id") {
-						var tasksEditDelItems = "<p class='clearFloat'><span class='editDelTask'><span class='editTask'><a href='#' id='edit" + i + "' onclick='editTask(" + i + ");'>Edit</a></span><span class='delTask'><a href='#' id='delete" + i + "' onclick='deleteTask(" + i + ");'>Delete</a></span></span></p>";
+						var tasksEditDelItems = "<p class='clearFloat'><span class='editDelTask'><span class='editTask'><a href='#' id='edit" + i + "' onclick='editTask(" + i + ");'>Edit</a></span><span class='delTask'><a href='#' id='delete" + i + "' onclick='deleteTask(" + i + ");' onmouseover='showWarningDeleteTask(" + i + ");' onmouseout='hideWarningDeleteTask(" + i + ");'>Delete</a><span class='delTaskWarn hide'>Deletion of this task can not be undone. Please make sure before you delete.</span</span></span></p>";
 						continue;
 					}
 					var keyLbl = key.replace('_', ' ');
@@ -125,9 +125,12 @@ taskManager.updateTasks = {
 		},
 
 		addTaskForm = function () {
+			taskManager.utils.getElem("form_add_task").reset();
+			taskManager.displayItems.getTaskCreatedDate();
 			taskManager.utils.getElem("addTaskContent").className = "";
 			taskManager.utils.getElem("listTaskContent").className = "hide";
 			taskManager.utils.getElem("addEditSuccess").className = "hide";
+			taskManager.utils.getElem("deleteSuccess").className = "hide";
 			var currentTaskArray = that.getTasks();
 			var tasks = JSON.parse(currentTaskArray);
 			console.log("Length of the task: " + tasks.length);
@@ -172,6 +175,14 @@ taskManager.updateTasks = {
 			localStorage.setItem('tasks', JSON.stringify(tasks));
 			console.log(tasks.tasks_list.length);
 			that.listTasks();
+		},
+
+		showWarningDeleteTask = function(taskNum) {
+			taskManager.utils.getElem("delete" + taskNum).nextSibling.className = "delTaskWarn";
+		},
+
+		hideWarningDeleteTask = function(taskNum) {
+			taskManager.utils.getElem("delete" + taskNum).nextSibling.className = "delTaskWarn hide";
 		}
 	}
 };
