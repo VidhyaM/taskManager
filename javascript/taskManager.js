@@ -8,10 +8,14 @@ taskManager.utils = {
 
 taskManager.displayItems = {
 	init: function () {
+		var that = taskManager.updateTasks;
 		this.checklocalStorageSupport();
 		this.eventHandlers();
 		this.getTaskCreatedDate();
-		taskManager.utils.getElem("task_id").value = localStorage.length;
+		var currentTaskArray = that.getTasks();
+		var tasks = JSON.parse(currentTaskArray);
+		console.log("Length of the task: " + tasks.length);
+		taskManager.utils.getElem("task_id").value = tasks.length;
 	},
 	checklocalStorageSupport: function() {
 		if(window.localStorage) {
@@ -55,24 +59,43 @@ taskManager.updateTasks = {
 		}
 		return formFieldsValObj;
 	},
+	
+	getTasks: function(){
+		var tasks = localStorage.getItem('tasks');
+		console.log(tasks);
+		if(tasks == undefined){
+			tasks = {length: 0, tasks_list:[]};
+			tasks = JSON.stringify(tasks);
+		}
+		return tasks;
+	},
 
 	saveTasks: function(formFieldsValObj) {
 		formFieldJSON = JSON.stringify(formFieldsValObj);
-		localStorage[localStorage.length] = formFieldJSON;
+		var tasks = this.getTasks();
+		console.log(tasks);
+		tasks = JSON.parse(tasks);
+		
+		tasks.tasks_list[tasks.length] = formFieldJSON;
+		tasks.length = tasks.length + 1;
+		localStorage.setItem('tasks', JSON.stringify(tasks));
 	},
 
 	listTasks: function() {
-		var taskCount = localStorage.length;
+		console.log("Listing of tasks");
+		var tasks = JSON.parse(this.getTasks());
+		var taskCount = tasks.length;
 		if (taskCount == 0) {
 			taskManager.utils.getElem("noTasks").className = "";
 		} else {
+			taskManager.utils.getElem("noTasks").className = "hide";
 			var tasksItems = "<ul class='tasksList'>";
-			for(var i = 0; i < localStorage.length; i++) {
+			for(var i = 0; i < tasks.length; i++) {
 				tasksItems += "<li class='tasksDisp'>";
-				var taskRecordObj = JSON.parse(localStorage[i]);
+				var taskRecordObj = JSON.parse(tasks.tasks_list[i]);
 				for (var key in taskRecordObj) {
 					if (key === "task_id") {
-						var tasksEditDelItems = "<p class='clearFloat'><span class='editDelTask'><span class='editTask'><a href='#' id='edit" + taskRecordObj[key] + "' onclick='editTask(" + taskRecordObj[key] + ");'>Edit</a></span><span class='delTask'><a href='#' id='delete" + taskRecordObj[key] + "' onclick='deleteTask(" + taskRecordObj[key] + ");'>Delete</a></span></span></p>";
+						var tasksEditDelItems = "<p class='clearFloat'><span class='editDelTask'><span class='editTask'><a href='#' id='edit" + i + "' onclick='editTask(" + i + ");'>Edit</a></span><span class='delTask'><a href='#' id='delete" + i + "' onclick='deleteTask(" + i + ");'>Delete</a></span></span></p>";
 						continue;
 					}
 					var keyLbl = key.replace('_', ' ');
@@ -105,7 +128,10 @@ taskManager.updateTasks = {
 			taskManager.utils.getElem("addTaskContent").className = "";
 			taskManager.utils.getElem("listTaskContent").className = "hide";
 			taskManager.utils.getElem("addEditSuccess").className = "hide";
-			taskManager.utils.getElem("task_id").value = localStorage.length;
+			var currentTaskArray = that.getTasks();
+			var tasks = JSON.parse(currentTaskArray);
+			console.log("Length of the task: " + tasks.length);
+			taskManager.utils.getElem("task_id").value = tasks.length;
 			listTaskLnk.className = "";
 			this.className = "active";
 		},
@@ -132,7 +158,20 @@ taskManager.updateTasks = {
 		},
 
 		deleteTask = function (taskNum) {
+			taskManager.utils.getElem("deleteSuccess").className = "";
+			taskManager.utils.getElem("addEditSuccess").className = "hide";
 			console.log("Delete operation for taskID: " + taskNum);
+			var currentTaskArray = that.getTasks();
+			var tasks = JSON.parse(currentTaskArray);
+			tasks.tasks_list.splice(taskNum, 1);
+			tasks.length = tasks.length - 1;
+			if(tasks.length <= 0) {
+				tasks.length = 0;
+			}
+			console.log("Tasks count after deletion: " + tasks.length);
+			localStorage.setItem('tasks', JSON.stringify(tasks));
+			console.log(tasks.tasks_list.length);
+			that.listTasks();
 		}
 	}
 };
