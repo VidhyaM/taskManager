@@ -14,7 +14,6 @@ taskManager.displayItems = {
 		this.getTaskCreatedDate();
 		var currentTaskArray = that.getTasks();
 		var tasks = JSON.parse(currentTaskArray);
-		console.log("Length of the task: " + tasks.length);
 		taskManager.utils.getElem("task_id").value = tasks.length;
 	},
 	checklocalStorageSupport: function() {
@@ -60,9 +59,8 @@ taskManager.updateTasks = {
 		return formFieldsValObj;
 	},
 	
-	getTasks: function(){
+	getTasks: function() {
 		var tasks = localStorage.getItem('tasks');
-		console.log(tasks);
 		if(tasks == undefined){
 			tasks = {length: 0, tasks_list:[]};
 			tasks = JSON.stringify(tasks);
@@ -73,16 +71,21 @@ taskManager.updateTasks = {
 	saveTasks: function(formFieldsValObj) {
 		formFieldJSON = JSON.stringify(formFieldsValObj);
 		var tasks = this.getTasks();
-		console.log(tasks);
 		tasks = JSON.parse(tasks);
-		
 		tasks.tasks_list[tasks.length] = formFieldJSON;
 		tasks.length = tasks.length + 1;
 		localStorage.setItem('tasks', JSON.stringify(tasks));
 	},
 
+	saveEditedTasks: function(formFieldsValObj) {
+		formFieldJSON = JSON.stringify(formFieldsValObj);
+		var tasks = this.getTasks();
+		tasks = JSON.parse(tasks);
+		tasks.tasks_list[formFieldsValObj.task_id] = formFieldJSON;
+		localStorage.setItem('tasks', JSON.stringify(tasks));
+	},
+
 	listTasks: function() {
-		console.log("Listing of tasks");
 		var tasks = JSON.parse(this.getTasks());
 		var taskCount = tasks.length;
 		if (taskCount == 0) {
@@ -111,15 +114,25 @@ taskManager.updateTasks = {
 	eventHandlers: function() {
 		var formObj = taskManager.utils.getElem(this.fields.formAddTask);
 		var that = taskManager.updateTasks;
+		var addTaskBtn = taskManager.utils.getElem("add_task");
+		var editTaskBtn = taskManager.utils.getElem("edit_task");
 		var addTaskLnk = taskManager.utils.getElem("addTaskLink");
 		var addYourTaskLink = taskManager.utils.getElem("addYourTaskLink");
 		var addEditLink = taskManager.utils.getElem("addEditLink");
 		var listTaskLnk = taskManager.utils.getElem("listTaskLink");
 		
-		formObj.onsubmit = function() {
+		addTaskBtn.onclick = function() {
 			var errFlag = false;
 			formFieldsValObj = that.getFormFields(formObj);
 			that.saveTasks(formFieldsValObj);
+			redirectToTasksList(true);
+			return errFlag;
+		},
+
+		editTaskBtn.onclick = function() {
+			var errFlag = false;
+			formFieldsValObj = that.getFormFields(formObj);
+			that.saveEditedTasks(formFieldsValObj);
 			redirectToTasksList(true);
 			return errFlag;
 		},
@@ -128,15 +141,16 @@ taskManager.updateTasks = {
 			taskManager.utils.getElem("form_add_task").reset();
 			taskManager.displayItems.getTaskCreatedDate();
 			taskManager.utils.getElem("addTaskContent").className = "";
+			taskManager.utils.getElem("add_task").className = "button";
+			taskManager.utils.getElem("edit_task").className = "button hide";
 			taskManager.utils.getElem("listTaskContent").className = "hide";
 			taskManager.utils.getElem("addEditSuccess").className = "hide";
 			taskManager.utils.getElem("deleteSuccess").className = "hide";
 			var currentTaskArray = that.getTasks();
 			var tasks = JSON.parse(currentTaskArray);
-			console.log("Length of the task: " + tasks.length);
 			taskManager.utils.getElem("task_id").value = tasks.length;
 			listTaskLnk.className = "";
-			this.className = "active";
+			taskManager.utils.getElem("addTaskLink").className = "active";
 		},
 
 		redirectToTasksList = function (msgFlag) {
@@ -157,13 +171,20 @@ taskManager.updateTasks = {
 		listTaskLnk.onclick = redirectToTasksList,
 
 		editTask = function (taskNum) {
-			console.log("Edit operation clicked for taskID: " + taskNum);
+			var currentTaskArray = JSON.parse(localStorage["tasks"]);
+			var currentSelectedTask = JSON.parse(currentTaskArray.tasks_list[taskNum]);
+			for(var key in currentSelectedTask){
+				taskManager.utils.getElem(key).value = currentSelectedTask[key];
+			}
+			taskManager.utils.getElem("listTaskContent").className = "hide";
+			taskManager.utils.getElem("add_task").className = "button hide";
+			taskManager.utils.getElem("addTaskContent").className = "";
+			taskManager.utils.getElem("edit_task").className = "button";
 		},
 
 		deleteTask = function (taskNum) {
 			taskManager.utils.getElem("deleteSuccess").className = "";
 			taskManager.utils.getElem("addEditSuccess").className = "hide";
-			console.log("Delete operation for taskID: " + taskNum);
 			var currentTaskArray = that.getTasks();
 			var tasks = JSON.parse(currentTaskArray);
 			tasks.tasks_list.splice(taskNum, 1);
@@ -171,9 +192,7 @@ taskManager.updateTasks = {
 			if(tasks.length <= 0) {
 				tasks.length = 0;
 			}
-			console.log("Tasks count after deletion: " + tasks.length);
 			localStorage.setItem('tasks', JSON.stringify(tasks));
-			console.log(tasks.tasks_list.length);
 			that.listTasks();
 		},
 
